@@ -1,21 +1,44 @@
+/* Tags */
+
+html {
+    font: 14px Verdana;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+hr {
+    border-top:2px solid grey;
+}
+
+input {
+    
+}
+
+
+/* Class */
+
 .main-conteiner {
-    width: 80%;
-    height: 500px;
-    margin: 40px 10% 0 10%;
+    display: flex;
+    justify-content: center;
+    width: 90%;
     border: 1px solid black;
+    margin: 5%;
 }
 
 .login-conteiner {
     width: 50%;
-    height: 50%;
-    margin: 40px 25% 40px 25%;
+    height: 500px;
     border: 1px solid black;
+    margin: 5px;
 }
 
 .btn {
-    display: block;
+    width: 100px;
 }
 
-label {
-    display: block;
-}
