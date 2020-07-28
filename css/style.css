@@ -16,29 +16,49 @@ hr {
     border-top:2px solid grey;
 }
 
-input {
-    
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+input[type="text"] {
+    display: block;
+    width: 20%;
+    height: 30px;
+    margin: 10px 40% 10px 40%;
+}
+
+input[type="checkbox"] {
+    margin: 10px 0 10px 35%;
+}
+
+label {
+    margin: 0 10px 0 0px;
 }
 
 
 /* Class */
 
 .main-conteiner {
-    display: flex;
-    justify-content: center;
-    width: 90%;
+    width: 98%;
     border: 1px solid black;
-    margin: 5%;
+    margin: 1%;
 }
 
 .login-conteiner {
-    width: 50%;
-    height: 500px;
+    width: 98%;
+    height: 300px;
     border: 1px solid black;
-    margin: 5px;
+    margin: 1%;
 }
 
 .btn {
-    width: 100px;
+    width: 30%;
+    height: 30px;
+    margin: 10px 35% 10px 35%;
 }
 
+.Href {
+    color: blue;
+    margin: 10px 10px 10px 40px;
+}
