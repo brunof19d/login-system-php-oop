@@ -1,3 +1,24 @@
+<?php
+
+include 'User.php';
+include 'DatabaseRepository.php';
+
+$user = new User;
+$db = new DatabaseRepository($pdo);
+
+if (array_key_exists('username', $_POST)) {
+    $user->setUsername($_POST['username']);
+}
+
+if (array_key_exists('password', $_POST)) {
+    $user->setPassword($_POST['password']);
+}
+
+$db->saveUser($user);
+header('Location: index.php');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -35,5 +56,13 @@
 <footer>
     <h2>By Me</h2>
 </footer>
+
+<?php
+
+echo $user->getUsername() . PHP_EOL;
+
+echo $user->getPassword();
+
+?>
 
 </html>
