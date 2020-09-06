@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author           Bruno Dadario <brunof19d@gmail.com>
  * @copyright        (c) 2020, Bruno Dadario. All Rights Reserved.
@@ -7,17 +8,17 @@
 
 class User
 {
-   
-    private $email;
-    private $password;
-    private $confirm_password;
+
+    private string $email;
+    private string $password;
+    private string $confirm_password;
 
     public function setEmail($email)
     {
         $this->email = $email;
     }
 
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -27,18 +28,8 @@ class User
         $this->password = $password;
     }
 
-    public function getPassword()
+    public function getPassword(): string
     {
         return $this->password;
-    }
-
-    public function setConfirmPassword($confirm_password)
-    {
-        $this->confirm_password = $confirm_password;
-    }
-
-    public function getConfirmPassword()
-    {
-        return $this->confirm_password;
     }
 }
