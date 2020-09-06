@@ -7,3 +7,8 @@
  */
 
 require_once "lib/database.php";
+require_once "model/User.php";
+require_once "model/UserRepository.php";
+
+$user = new User();
+$user_repository = new UserRepository($pdo);
