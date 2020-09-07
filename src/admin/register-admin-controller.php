@@ -11,6 +11,11 @@ try {
         $password_user = test_input(filter_var($_POST['password_user'], FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
         $password_confirm = test_input(filter_var($_POST['confirm_password_user'], FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
 
+        // Check if $email_user already registered in database
+        if ($user_repository->isRegisteredUser($email_user)) {
+            throw new Exception("Email already registered in database");
+        }
+
         // Check that No POST in input email
         if ($email_user === FALSE) {
             throw new Exception("Please enter a valid email address");
@@ -25,7 +30,7 @@ try {
         if ($password_user != $password_confirm) {
             throw new Exception("Password fields must be the same");
         }
-
+        
         $user->setEmail($email_user);
         $user->setPassword($password_user);
         $user_repository->registerUser($user);
