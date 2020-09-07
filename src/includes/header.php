@@ -12,6 +12,6 @@
 
 <body>
 
-    <header class="container mt-5 border rounded text-center">
+    <header class="container mt-5 text-center">
         <h5>Simple login system</h5>
     </header>

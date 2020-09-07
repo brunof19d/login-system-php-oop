@@ -10,7 +10,7 @@
 class UserRepository
 {
 
-    private $pdo;
+    public $pdo;
 
     public function __construct(PDO $pdo)
     {
@@ -27,5 +27,13 @@ class UserRepository
             'email_user'    => strip_tags($user->getEmail()),
             'password_user' => strip_tags($user->getPassword())
         ]);
+    }
+
+    public function searchUsers(): array
+    {
+        $sqlSelect = "SELECT * FROM user_login";
+        $statement = $this->pdo->query($sqlSelect);
+        $result = $statement->fetchAll();
+        return $result;
     }
 }

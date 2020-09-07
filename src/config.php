@@ -7,8 +7,20 @@
  */
 
 require_once "lib/database.php";
-require_once "model/User.php";
-require_once "model/UserRepository.php";
+require_once "lib/helper.php";
+
+if (!session_id()) {
+    session_start();
+}
+
+spl_autoload_register(function ($nameClass) {
+    $path_to_class = __DIR__ . '/model/' . $nameClass . '.php';
+    if (file_exists($path_to_class)) {
+        require_once $path_to_class;
+    } else {
+        throw new Exception("Unable to load: $nameClass");
+    }
+});
 
 $user = new User();
 $user_repository = new UserRepository($pdo);

@@ -8,10 +8,8 @@
 
 class User
 {
-
     private string $email;
     private string $password;
-    private string $confirm_password;
 
     public function setEmail($email)
     {
