@@ -1,0 +1,20 @@
+{
+    "authors": [
+        {
+            "name": "brunof19d",
+            "email": "brunof19d@gmail.com"
+        }
+    ],
+    "description": "Simple login system using PHP",
+    "name": "bruno/login-composer",
+
+    "require": {
+        "php": "^7.2",
+        "ext-pdo": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Login\\App\\": "src"
+        }
+    }
+}
