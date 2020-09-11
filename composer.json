@@ -5,11 +5,11 @@
             "email": "brunof19d@gmail.com"
         }
     ],
-    "description": "Simple login system using PHP",
+    "description": "Simple login system using PHP Object Oriented Programming",
     "name": "bruno/login-composer",
 
     "require": {
-        "php": "^7.2",
+        "php": "^7.4",
         "ext-pdo": "*"
     },
     "autoload": {
