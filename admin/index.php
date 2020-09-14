@@ -1,7 +1,5 @@
 <?php
 /* Controller View */
-require_once "config.php";
-/* Controller View */
 require_once "controller/admin_controller.php";
 /* Includes Header */
 require_once "lib/includes/header.php";
@@ -11,6 +9,13 @@ require_once "lib/includes/header.php";
     <h3 class="h2 mb-0">Admin Page - Register User </h3>
 </div>
 <div class="card-body p-5">
+
+    <?php if ($msg) : ?>
+        <div class="alert <?= $msg['class'] ?>">
+            <?= $msg['message'] ?>
+        </div>
+    <?php endif; ?>
+
     <div class="form-group">
         <label for="inputEmail">Email:</label>
         <input type="text" name="input_email" id="inputEmail" placeholder="user@email.com"

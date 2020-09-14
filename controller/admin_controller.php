@@ -3,14 +3,16 @@
 /* Config */
 require_once "config.php";
 
-/* Controller Register User */
+$msg = $message->getAlert();
 
+/* Controller Register User */
 try {
     if (isset($_POST['register_user'])) {
       $app->persist();
+        $message->setAlert('User added successfully', 'alert-success', 'index.php');
     }
 } catch (Exception $error) {
-    echo $error->getMessage();
+    $message->setAlert($error->getMessage(), 'alert-danger', 'index.php');
 }
 
 /* List of Users */
