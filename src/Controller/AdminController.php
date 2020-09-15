@@ -25,6 +25,18 @@ class AdminController
 
     }
 
+    public function deleteValitadion($id)
+    {
+        $this->validId($id);
+
+        $user = new User();
+        $result = new PdoUserRepository();
+
+        $user->setId($id);
+
+        $result->remove($user);
+    }
+
     public function validEmail($email): void
     {
         $result = filter_var($email, FILTER_VALIDATE_EMAIL);
@@ -42,6 +54,14 @@ class AdminController
             throw new Exception('Password invalid');
         } elseif (strlen($result) < 3) {
             throw new Exception('Password must to be longer three characters');
+        }
+    }
+
+    public function validId($id): void
+    {
+        $result = filter_var($id, FILTER_VALIDATE_INT);
+        if ($result === false or $result <= 0) {
+            throw new Exception('ID is invalid');
         }
     }
 }

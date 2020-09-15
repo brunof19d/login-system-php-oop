@@ -59,8 +59,12 @@ class PdoUserRepository implements UserRepository
 
     }
 
-    public function remove(User $user): bool
+    public function remove(User $user): void
     {
-        // TODO: Implement remove() method.
+        $sql = "DELETE FROM user_login WHERE user_id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':id', $user->getId());
+        $stmt->execute();
+
     }
 }

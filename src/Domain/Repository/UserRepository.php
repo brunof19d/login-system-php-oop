@@ -10,5 +10,5 @@ interface UserRepository
 {
     public function allUsers(): array;
     public function save(User $user): bool;
-    public function remove(User $user): bool;
+    public function remove(User $user): void;
 }
