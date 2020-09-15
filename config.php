@@ -22,3 +22,4 @@ $result = new PdoUserRepository();
 $controller = new AdminController();
 $message = new Helper();
 $helper = new Helper();
+$login = new \Login\App\Controller\LoginController();

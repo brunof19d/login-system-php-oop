@@ -55,7 +55,7 @@ class AdminController
         $result = filter_var($email, FILTER_VALIDATE_EMAIL);
 
         if ($result === false) {
-            throw new Exception('Email invalid');
+            throw new Exception('Please, insert email valid');
         }
     }
 
@@ -64,7 +64,7 @@ class AdminController
         $result = trim(filter_var($password, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
 
         if (!$result) {
-            throw new Exception('Password invalid');
+            throw new Exception('Please, insert password valid');
         } elseif (strlen($result) < 3) {
             throw new Exception('Password must to be longer three characters');
         }

@@ -74,4 +74,37 @@ class PdoUserRepository implements UserRepository
         $stmt->bindValue(':id', $user->getId());
         $stmt->execute();
     }
+
+    public function login(User $user): bool
+
+    {
+        $sql = "SELECT * FROM user_login WHERE email_user = :email_user AND password_user = :password_user";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':email_user', $user->getEmail());
+        $stmt->bindValue(':password_user', $user->getPassword());
+        $stmt->execute();
+
+        $count = $stmt->rowCount();
+
+        if ($count > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public function active(User $user): bool
+    {
+        $sql = "SELECT * FROM user_login WHERE email_user = :email_user AND active_user = :active_user";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':email_user', $user->getEmail());
+        $stmt->bindValue(':active_user', 1);
+        $stmt->execute();
+        $count = $stmt->rowCount();
+
+        if ($count > 0) {
+            return true;
+        }
+        return false;
+    }
+
 }

@@ -1,5 +1,5 @@
 <?php
-require_once "config.php";
+require_once "controller/login_controller.php";
 require_once "lib/includes/header.php";
 ?>
 
@@ -10,15 +10,23 @@ require_once "lib/includes/header.php";
 </div>
 <!-- Form Login -->
 <div class="card-body p-5">
+
+    <?php if ($msg) : ?>
+        <div class="alert <?= $msg['class'] ?>">
+            <?= $msg['message'] ?>
+        </div>
+    <?php endif; ?>
+
+
     <!-- Input Email -->
     <div class="form-group">
         <label for="inputEmail">Email:</label>
-        <input type="email" name="input_email" id="inputEmail" placeholder="user@email.com" class="form-control"/>
+        <input type="email" name="input_email" id="inputEmail" placeholder="user@email.com" class="form-control" required/>
     </div>
     <!-- Input Password -->
     <div class="form-group">
         <label for="inputPassword">Password:</label>
-        <input type="password" name="input_pasword" id="inputPassword" placeholder="*****" class="form-control"/>
+        <input type="password" name="input_password" id="inputPassword" placeholder="*****" class="form-control" required/>
     </div>
     <!-- Button -->
     <div class="form-group">
