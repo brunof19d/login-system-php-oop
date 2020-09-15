@@ -8,7 +8,12 @@ $msg = $message->getAlert();
 /* Controller Register User */
 try {
     if (isset($_POST['register_user'])) {
-      $app->persist();
+
+        $email = $_POST['input_email'];
+        $password = $_POST['input_password'];
+
+        $controller->registerValidation($email, $password);
+
         $message->setAlert('User added successfully', 'alert-success', 'index.php');
     }
 } catch (Exception $error) {

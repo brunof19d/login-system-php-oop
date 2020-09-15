@@ -19,5 +19,5 @@ if (!session_id()) {
 /* Call class using for controller */
 $user = new User();
 $result = new PdoUserRepository();
-$app = new AdminController();
+$controller = new AdminController();
 $message = new Helper();
