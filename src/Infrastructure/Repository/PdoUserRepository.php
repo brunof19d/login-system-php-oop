@@ -58,6 +58,21 @@ class PdoUserRepository implements UserRepository
         return false;
     }
 
+    public function isUserAlreadyRegistered(User $user): bool
+    {
+        $sql = "SELECT * FROM user_login WHERE email_user = :email_user";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':email_user', $user->getEmail());
+        $stmt->execute();
+
+        $count = $stmt->rowCount();
+
+        if ($count > 0) {
+            return true;
+        }
+        return false;
+    }
+
     public function remove(User $user): void
     {
         $sql = "DELETE FROM user_login WHERE user_id = :id";
@@ -106,5 +121,6 @@ class PdoUserRepository implements UserRepository
         }
         return false;
     }
+
 
 }

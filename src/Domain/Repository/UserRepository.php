@@ -19,4 +19,6 @@ interface UserRepository
     public function login(User $user): bool;
 
     public function active(User $user): bool;
+
+    public function isUserAlreadyRegistered(User $user): bool;
 }

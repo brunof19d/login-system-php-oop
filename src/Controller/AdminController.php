@@ -21,6 +21,10 @@ class AdminController
         $user->setEmail($email);
         $user->setPassword($password);
 
+        if ($result->isUserAlreadyRegistered($user)) {
+            throw new Exception('User already exists');
+        }
+
         $result->save($user);
 
     }
