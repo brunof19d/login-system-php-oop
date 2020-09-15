@@ -26,4 +26,13 @@ class Helper
 
         return $msg;
     }
+
+    public function switchActiveName($active)
+    {
+        if ($active == 1) {
+            return 'Yes';
+        }
+
+        return 'No';
+    }
 }

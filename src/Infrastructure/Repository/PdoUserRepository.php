@@ -56,7 +56,6 @@ class PdoUserRepository implements UserRepository
             return true;
         }
         return false;
-
     }
 
     public function remove(User $user): void
@@ -65,6 +64,14 @@ class PdoUserRepository implements UserRepository
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':id', $user->getId());
         $stmt->execute();
+    }
 
+    public function update(User $user): void
+    {
+        $sql = "UPDATE user_login SET active_user = :active_user WHERE user_id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':active_user', $user->getActive());
+        $stmt->bindValue(':id', $user->getId());
+        $stmt->execute();
     }
 }

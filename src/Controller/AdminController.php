@@ -37,6 +37,19 @@ class AdminController
         $result->remove($user);
     }
 
+    public function switchStatusUser($id, $active)
+    {
+        $this->validId($id);
+
+        $user = new User();
+        $result = new PdoUserRepository();
+
+        $user->setId($id);
+        $user->setActive($active);
+
+        $result->update($user);
+    }
+
     public function validEmail($email): void
     {
         $result = filter_var($email, FILTER_VALIDATE_EMAIL);

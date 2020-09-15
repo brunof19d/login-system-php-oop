@@ -32,6 +32,34 @@ try {
     $message->setAlert($error->getMessage(), 'alert-danger', 'index.php');
 }
 
+/* Active User Controller */
+try {
+    if (isset($_GET['active'])) {
+        $id = $_GET['active'];
+        $active = 1;
+        $controller->switchStatusUser($id, $active);
+
+        $message->setAlert('User active with successfully', 'alert-success', 'index.php');
+    }
+} catch (Exception $error) {
+    $message->setAlert($error->getMessage(), 'alert-danger', 'index.php');
+}
+
+/* inactive User Controller */
+try {
+    if (isset($_GET['inactive'])) {
+        $id = $_GET['inactive'];
+        $active = 0;
+        $controller->switchStatusUser($id, $active);
+
+        $message->setAlert('User successfully deactivated', 'alert-success', 'index.php');
+    }
+} catch (Exception $error) {
+    $message->setAlert($error->getMessage(), 'alert-danger', 'index.php');
+}
+
+
+
 /* List Users Controller */
 $userList = $result->allUsers();
 

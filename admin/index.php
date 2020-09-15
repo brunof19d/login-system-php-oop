@@ -45,11 +45,15 @@ require_once "lib/includes/header.php";
     <tbody style="font-size: 14px;">
     <?php foreach ($userList as $user): ?>
         <tr>
-            <th style="width: 5%"><?php echo $user->getId(); ?></th>
-            <td><?php echo $user->getEmail(); ?></td>
-            <td style="width: 5%"><?php echo $user->getActive(); ?></td>
-            <td style="width: 10%"><a class="btn btn-info">Remove access</a></td>
-            <td style="width: 10%"><a href="index.php?delete=<?=$user->getId();?>" class="btn btn-danger">Delete User</a></td>
+            <th style="width: 5%"><?= $user->getId(); ?></th>
+            <td><?= $user->getEmail(); ?></td>
+            <td style="width: 5%"><?= $helper->switchActiveName($user->getActive()); ?></td>
+            <?php if ($user->getActive() == 1): ?>
+                <td style="width: 10%"><a href="index.php?inactive=<?= $user->getId(); ?>" class="btn btn-info">Remove access</a></td>
+            <?php else : ?>
+                <td style="width: 10%"><a href="index.php?active=<?= $user->getId(); ?>" class="btn btn-warning">Active access</a></td>
+            <?php endif; ?>
+            <td style="width: 10%"><a href="index.php?delete=<?= $user->getId(); ?>" class="btn btn-danger">Delete User</a></td>
         </tr>
     <?php endforeach; ?>
     </tbody>

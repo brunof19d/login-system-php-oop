@@ -21,3 +21,4 @@ $user = new User();
 $result = new PdoUserRepository();
 $controller = new AdminController();
 $message = new Helper();
+$helper = new Helper();
