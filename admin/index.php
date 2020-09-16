@@ -4,18 +4,18 @@ require_once "controller/admin_controller.php";
 /* Includes Header */
 require_once "lib/includes/header.php";
 ?>
-
 <div class="card-header p-5 text-center">
     <h3 class="h2 mb-0">Admin Page - Register User </h3>
+    <p class="lead mt-3">
+        <a class="btn btn-primary" href="<?= SITE_URL . 'admin/index.php?logout=true'; ?>" role="button">Logout</a>
+    </p>
 </div>
 <div class="card-body p-5">
-
     <?php if ($msg) : ?>
         <div class="alert <?= $msg['class'] ?>">
             <?= $msg['message'] ?>
         </div>
     <?php endif; ?>
-
     <div class="form-group">
         <label for="inputEmail">Email:</label>
         <input type="text" name="input_email" id="inputEmail" placeholder="user@email.com"

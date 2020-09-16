@@ -10,7 +10,9 @@ try {
         $password = $_POST['input_password'];
 
         $login->loginValidation($email, $password);
+
     }
 } catch (Exception $error) {
     $message->setAlert($error->getMessage(), 'alert-danger', 'index.php');
 }
+

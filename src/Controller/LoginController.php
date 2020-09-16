@@ -34,8 +34,33 @@ class LoginController extends AdminController
         } elseif ($queryActive == FALSE) {
             throw new Exception('User is not active, please contact Web Administrator');
         } else {
+            $_SESSION['logged_user'] = $queryLogin;
             header("Location:" . SITE_URL . "admin/index.php");
+            die();
         }
     }
+
+    public function blockAdmin()
+    {
+        $url = $_SERVER['REQUEST_URI'];
+
+        $is_admin = (strstr($url, '/admin/'));
+
+        if ($is_admin == true and $this->IsUserLogged() == false) {
+            header('Location: ' . SITE_URL . "index.php");
+            die();
+        }
+    }
+
+    public function IsUserLogged(): bool
+    {
+        return (isset($_SESSION['logged_user']));
+    }
+
+    public function logout()
+    {
+        unset($_SESSION['logged_user']);
+    }
+
 
 }

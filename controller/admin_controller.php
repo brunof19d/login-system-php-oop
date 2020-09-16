@@ -58,8 +58,6 @@ try {
     $message->setAlert($error->getMessage(), 'alert-danger', 'index.php');
 }
 
-
-
 /* List Users Controller */
 $userList = $result->allUsers();
 

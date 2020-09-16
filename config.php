@@ -11,7 +11,7 @@ use Login\App\Infrastructure\Repository\PdoUserRepository;
 /* Config site */
 define('SITE_URL', 'http://localhost/login-system-php-oo/'); // Put your URL project here
 
-/** Habilita o uso de sessões na nossa aplicação */
+/* Enables the use of sessions in our application */
 if (!session_id()) {
     session_start();
 }
@@ -23,3 +23,11 @@ $controller = new AdminController();
 $message = new Helper();
 $helper = new Helper();
 $login = new \Login\App\Controller\LoginController();
+
+/* Logs the user out */
+if (isset($_GET['logout'])) {
+    $login->logout();
+}
+
+/* Block admin access */
+$login->blockAdmin();
