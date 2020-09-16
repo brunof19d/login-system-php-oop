@@ -47,7 +47,7 @@ require_once "lib/includes/header.php";
         <tr>
             <th style="width: 5%"><?= $user->getId(); ?></th>
             <td><?= $user->getEmail(); ?></td>
-            <td style="width: 5%"><?= $helper->switchActiveName($user->getActive()); ?></td>
+            <td style="width: 5%"><?= $message->switchActiveName($user->getActive()); ?></td>
             <?php if ($user->getActive() == 1): ?>
                 <td style="width: 10%"><a href="index.php?inactive=<?= $user->getId(); ?>" class="btn btn-info">Remove access</a></td>
             <?php else : ?>

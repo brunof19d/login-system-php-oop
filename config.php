@@ -4,6 +4,7 @@ require "vendor/autoload.php";
 
 /* Composer */
 use Login\App\Controller\AdminController;
+use Login\App\Controller\LoginController;
 use Login\App\Domain\Model\User;
 use Login\App\Helper\Helper;
 use Login\App\Infrastructure\Repository\PdoUserRepository;
@@ -21,8 +22,7 @@ $user = new User();
 $result = new PdoUserRepository();
 $controller = new AdminController();
 $message = new Helper();
-$helper = new Helper();
-$login = new \Login\App\Controller\LoginController();
+$login = new LoginController();
 
 /* Logs the user out */
 if (isset($_GET['logout'])) {
