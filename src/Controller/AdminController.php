@@ -19,11 +19,14 @@ class AdminController
         $result = new PdoUserRepository();
 
         $user->setEmail($email);
-        $user->setPassword($password);
 
         if ($result->isUserAlreadyRegistered($user)) {
             throw new Exception('User already exists');
         }
+
+        // Make hash password
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $user->setPassword($hash);
 
         $result->save($user);
 
