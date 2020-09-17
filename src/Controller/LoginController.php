@@ -23,8 +23,15 @@ class LoginController
         $this->pdoRepository = new PdoUserRepository();
         $this->helper = new Helper();
     }
-    
-    public function loginValidation(string $email, string $password)
+
+    /**
+     * Receive the necessary data to validate the User in the system.
+     * @param string $email $_POST['input_email'].
+     * @param string $password $_POST['input_password'].
+     * @return void
+     * @throws Exception
+     */
+    public function loginValidation(string $email, string $password): void
     {
         $this->adminController->validEmail($email);
         $this->adminController->validPassword($password);
@@ -38,7 +45,14 @@ class LoginController
         $this->validUser($queryLogin, $queryActive);
     }
 
-    public function validUser($queryLogin, $queryActive)
+    /**
+     * Verify the user input (EMAIL, PASSWORD)correct and also if the user is active.
+     * @param bool $queryLogin
+     * @param bool $queryActive
+     * @return void
+     * @throws Exception
+     */
+    public function validUser(bool $queryLogin, bool $queryActive): void
     {
         if ($queryLogin == FALSE) {
             throw new Exception('Email or password wrong');
@@ -51,6 +65,10 @@ class LoginController
         }
     }
 
+    /**
+     * Blocks unauthenticated users from accessing administrative pages
+     * @return void
+     */
     public function blockAdmin(): void
     {
         $is_admin = ($this->helper->verifyUrlAdmin());
@@ -60,11 +78,19 @@ class LoginController
         }
     }
 
+    /**
+     * Returns if the user is logged or not.
+     * @return bool
+     */
     public function IsUserLogged(): bool
     {
         return (isset($_SESSION['logged_user']));
     }
 
+    /**
+     * Destroy session from the user.
+     * @return void
+     */
     public function logout(): void
     {
         unset($_SESSION['logged_user']);

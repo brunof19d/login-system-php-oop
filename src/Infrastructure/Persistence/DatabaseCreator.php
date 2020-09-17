@@ -9,8 +9,11 @@ use PDOException;
 
 class DatabaseCreator
 {
-    private $pdo;
-
+    /**
+     * Connects to the database.
+     * @return PDO
+     * @throws PDOException
+     */
     public static function getConnection(): PDO
     {
         $dsn = 'mysql:dbname=mylogin;host=127.0.0.1';

@@ -23,43 +23,63 @@ class AdminController
         $this->helper = new Helper();
     }
 
-
-    public function registerValidation(string $email, string $password)
+    /**
+     * Register the user in the system.
+     * @param string $email $_POST['input_email'].
+     * @param string $password $_POST['input_password'].
+     * @return void
+     * @throws Exception
+     */
+    public function registerValidation(string $email, string $password): void
     {
         $this->validEmail($email);
         $this->validPassword($password);
-
         $this->user->setEmail($email);
 
         if ($this->pdoRepository->isUserAlreadyRegistered($this->user)) {
             throw new Exception('User already exists');
         }
-
         // Make hash password
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $this->user->setPassword($hash);
-
         $this->pdoRepository->save($this->user);
     }
 
-    public function deleteValitadion($id)
+    /**
+     * Remove the user from the system.
+     * @param int $id User ID.
+     * @return void
+     * @throws Exception
+     */
+    public function deleteValidation(int $id): void
     {
         $this->validId($id);
         $this->user->setId($id);
         $this->pdoRepository->remove($this->user);
     }
 
-    public function switchStatusUser($id, $active)
+    /**
+     * Changes the user's status to active or inactive.
+     * @param int $id User ID.
+     * @param int $active Number 1 = Active, Number 0 Inactive.
+     * @return void
+     * @throws Exception
+     */
+    public function switchStatusUser(int $id, int $active): void
     {
         $this->validId($id);
-
         $this->user->setId($id);
         $this->user->setActive($active);
-
         $this->pdoRepository->update($this->user);
     }
 
-    public function validEmail($email): void
+    /**
+     * Filter received email by the $_POST.
+     * @param string $email string that the user wants to filter.
+     * @return void
+     * @throws Exception
+     */
+    public function validEmail(string $email): void
     {
         $result = filter_var($email, FILTER_VALIDATE_EMAIL);
         if ($result === false) {
@@ -67,7 +87,13 @@ class AdminController
         }
     }
 
-    public function validPassword($password): void
+    /**
+     * Filter received password by the $_POST.
+     * @param string $password string that the user wants to filter.
+     * @return void
+     * @throws Exception
+     */
+    public function validPassword(string $password): void
     {
         $result = trim(filter_var($password, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
         if (!$result) {
@@ -77,7 +103,13 @@ class AdminController
         }
     }
 
-    public function validId($id): void
+    /**
+     * Filter received number by the $_GET.
+     * @param int $id User ID.
+     * @return void
+     * @throws Exception
+     */
+    public function validId(int $id): void
     {
         $result = filter_var($id, FILTER_VALIDATE_INT);
         if ($result === false or $result <= 0) {

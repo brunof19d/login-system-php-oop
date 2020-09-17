@@ -18,6 +18,10 @@ class PdoUserRepository implements UserRepository
         $this->pdo = DatabaseCreator::getConnection();
     }
 
+    /**
+     * Returns the list of users registered in the system.
+     * @return array
+     */
     public function allUsers(): array
     {
         $sql = "SELECT * FROM user_login";
@@ -25,6 +29,11 @@ class PdoUserRepository implements UserRepository
         return $this->treatUserList($stmt);
     }
 
+    /**
+     * Treat the list received by the Database.
+     * @param PDOStatement $stmt Statement $sql->AllUser.
+     * @return array
+     */
     private function treatUserList(PDOStatement $stmt): array
     {
         $userDataList = $stmt->fetchAll();
@@ -41,7 +50,11 @@ class PdoUserRepository implements UserRepository
         return $userList;
     }
 
-
+    /**
+     * Register the user in the database.
+     * @param User $user Class User setters and getters.
+     * @return bool
+     */
     public function save(User $user): bool
     {
         $sql = "INSERT INTO user_login (email_user, password_user) VALUES (:email_user, :password_user)";
@@ -56,6 +69,11 @@ class PdoUserRepository implements UserRepository
         return false;
     }
 
+    /**
+     * Verify the user(email) already in Database.
+     * @param User $user Class User setters and getters.
+     * @return bool
+     */
     public function isUserAlreadyRegistered(User $user): bool
     {
         $sql = "SELECT * FROM user_login WHERE email_user = :email_user";
@@ -71,6 +89,11 @@ class PdoUserRepository implements UserRepository
         return false;
     }
 
+    /**
+     * Delete user in Database.
+     * @param User $user Class User setters and getters.
+     * @return void
+     */
     public function remove(User $user): void
     {
         $sql = "DELETE FROM user_login WHERE user_id = :id";
@@ -79,6 +102,11 @@ class PdoUserRepository implements UserRepository
         $stmt->execute();
     }
 
+    /**
+     * Active or Inactive user in the database.
+     * @param User $user Class User setters and getters.
+     * @return void
+     */
     public function update(User $user): void
     {
         $sql = "UPDATE user_login SET active_user = :active_user WHERE user_id = :id";
@@ -88,6 +116,11 @@ class PdoUserRepository implements UserRepository
         $stmt->execute();
     }
 
+    /**
+     * Logs in an administrative user.
+     * @param User $user Class User setters and getters.
+     * @return bool
+     */
     public function login(User $user): bool
 
     {
@@ -108,6 +141,11 @@ class PdoUserRepository implements UserRepository
         return false;
     }
 
+    /**
+     * Verify in database if this user active or not.
+     * @param User $user Class User setters and getters.
+     * @return bool
+     */
     public function active(User $user): bool
     {
         $sql = "SELECT * FROM user_login WHERE email_user = :email_user AND active_user = :active_user";

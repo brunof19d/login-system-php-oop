@@ -24,7 +24,7 @@ try {
     if (isset($_GET['delete'])) {
         $id = $_GET['delete'];
 
-        $controller->deleteValitadion($id);
+        $controller->deleteValidation($id);
 
         $message->setAlert('User remove successfully', 'alert-success', 'index.php');
     }
