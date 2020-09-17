@@ -11,7 +11,6 @@ use PDOStatement;
 
 class PdoUserRepository implements UserRepository
 {
-
     private PDO $pdo;
 
     public function __construct()
@@ -23,7 +22,6 @@ class PdoUserRepository implements UserRepository
     {
         $sql = "SELECT * FROM user_login";
         $stmt = $this->pdo->query($sql);
-
         return $this->treatUserList($stmt);
     }
 
@@ -101,16 +99,12 @@ class PdoUserRepository implements UserRepository
         $count = $stmt->rowCount();
 
         if ($count > 0) {
-
             $result = $stmt->fetch();
-
-            //check password
+            //Check password hash
             if (password_verify($user->getPassword(), $result['password_user'])) {
                 return true;
             }
-
         }
-
         return false;
     }
 
@@ -121,6 +115,7 @@ class PdoUserRepository implements UserRepository
         $stmt->bindValue(':email_user', $user->getEmail());
         $stmt->bindValue(':active_user', 1);
         $stmt->execute();
+
         $count = $stmt->rowCount();
 
         if ($count > 0) {
@@ -128,6 +123,4 @@ class PdoUserRepository implements UserRepository
         }
         return false;
     }
-
-
 }

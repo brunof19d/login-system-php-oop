@@ -27,12 +27,55 @@ class Helper
         return $msg;
     }
 
-    public function switchActiveName($active)
+    public function switchActiveName($active): string
     {
         if ($active == 1) {
             return 'Yes';
         }
 
         return 'No';
+    }
+
+    public function verifyUrlAdmin(): bool
+    {
+        if (strstr($_SERVER['REQUEST_URI'], '/admin/')) {
+            return true;
+        }
+        return false;
+    }
+
+    public function messageHeaderHtml(): void
+    {
+        if ($this->verifyUrlAdmin()) {
+            echo "Admin Page - Register User";
+        } else {
+            echo "Simple login using PHP Oriented Object";
+        }
+    }
+
+    public function messageLogout(): bool
+    {
+        if ($this->verifyUrlAdmin()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function defineButton(): void
+    {
+        if ($this->verifyUrlAdmin()) {
+            echo "Register";
+        } else {
+            echo "Login";
+        }
+    }
+
+    public function defineInputAttribute(): void
+    {
+        if ($this->verifyUrlAdmin()) {
+            echo "register_user";
+        } else {
+            echo "login_user";
+        }
     }
 }

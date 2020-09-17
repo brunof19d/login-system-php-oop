@@ -31,3 +31,4 @@ if (isset($_GET['logout'])) {
 
 /* Block admin access */
 $login->blockAdmin();
+

@@ -6,6 +6,7 @@ namespace Login\App\Controller;
 
 use Exception;
 use Login\App\Domain\Model\User;
+use Login\App\Helper\Helper;
 use Login\App\Infrastructure\Repository\PdoUserRepository;
 
 class LoginController extends AdminController
@@ -42,9 +43,8 @@ class LoginController extends AdminController
 
     public function blockAdmin()
     {
-        $url = $_SERVER['REQUEST_URI'];
-
-        $is_admin = (strstr($url, '/admin/'));
+        $helper = new Helper();
+        $is_admin = ($helper->verifyUrlAdmin());
 
         if ($is_admin == true and $this->IsUserLogged() == false) {
             header('Location: ' . SITE_URL . "index.php");
