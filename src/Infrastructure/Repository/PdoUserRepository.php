@@ -46,8 +46,8 @@ class PdoUserRepository implements UserRepository
     {
         $sql = "INSERT INTO user_login (email_user, password_user) VALUES (:email_user, :password_user)";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(':email_user', $user->getEmail());
-        $stmt->bindValue(':password_user', $user->getPassword());
+        $stmt->bindValue(':email_user', $user->getEmail(), PDO::PARAM_STR);
+        $stmt->bindValue(':password_user', $user->getPassword(), PDO::PARAM_STR);
         $stmt->execute();
 
         if ($stmt) {
@@ -60,7 +60,7 @@ class PdoUserRepository implements UserRepository
     {
         $sql = "SELECT * FROM user_login WHERE email_user = :email_user";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(':email_user', $user->getEmail());
+        $stmt->bindValue(':email_user', $user->getEmail(), PDO::PARAM_STR);
         $stmt->execute();
 
         $count = $stmt->rowCount();
@@ -75,7 +75,7 @@ class PdoUserRepository implements UserRepository
     {
         $sql = "DELETE FROM user_login WHERE user_id = :id";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(':id', $user->getId());
+        $stmt->bindValue(':id', $user->getId(), PDO::PARAM_INT);
         $stmt->execute();
     }
 
@@ -83,8 +83,8 @@ class PdoUserRepository implements UserRepository
     {
         $sql = "UPDATE user_login SET active_user = :active_user WHERE user_id = :id";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(':active_user', $user->getActive());
-        $stmt->bindValue(':id', $user->getId());
+        $stmt->bindValue(':active_user', $user->getActive(), PDO::PARAM_INT);
+        $stmt->bindValue(':id', $user->getId(), PDO::PARAM_INT);
         $stmt->execute();
     }
 
@@ -93,13 +93,13 @@ class PdoUserRepository implements UserRepository
     {
         $sql = "SELECT * FROM user_login WHERE email_user = :email_user";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(':email_user', $user->getEmail());
+        $stmt->bindValue(':email_user', $user->getEmail(), PDO::PARAM_STR);
         $stmt->execute();
 
         $count = $stmt->rowCount();
 
         if ($count > 0) {
-            $result = $stmt->fetch();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
             //Check password hash
             if (password_verify($user->getPassword(), $result['password_user'])) {
                 return true;
@@ -112,7 +112,7 @@ class PdoUserRepository implements UserRepository
     {
         $sql = "SELECT * FROM user_login WHERE email_user = :email_user AND active_user = :active_user";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(':email_user', $user->getEmail());
+        $stmt->bindValue(':email_user', $user->getEmail(), PDO::PARAM_STR);
         $stmt->bindValue(':active_user', 1);
         $stmt->execute();
 
