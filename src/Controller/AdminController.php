@@ -6,61 +6,62 @@ namespace Login\App\Controller;
 
 use Exception;
 use Login\App\Domain\Model\User;
+use Login\App\Helper\Helper;
 use Login\App\Infrastructure\Repository\PdoUserRepository;
 
 class AdminController
 {
+
+    private User $user;
+    private PdoUserRepository $pdoRepository;
+    private Helper $helper;
+
+    public function __construct()
+    {
+        $this->user = new User();
+        $this->pdoRepository = new PdoUserRepository();
+        $this->helper = new Helper();
+    }
+
+
     public function registerValidation(string $email, string $password)
     {
         $this->validEmail($email);
         $this->validPassword($password);
 
-        $user = new User();
-        $result = new PdoUserRepository();
+        $this->user->setEmail($email);
 
-        $user->setEmail($email);
-
-        if ($result->isUserAlreadyRegistered($user)) {
+        if ($this->pdoRepository->isUserAlreadyRegistered($this->user)) {
             throw new Exception('User already exists');
         }
 
         // Make hash password
         $hash = password_hash($password, PASSWORD_DEFAULT);
-        $user->setPassword($hash);
+        $this->user->setPassword($hash);
 
-        $result->save($user);
-
+        $this->pdoRepository->save($this->user);
     }
 
     public function deleteValitadion($id)
     {
         $this->validId($id);
-
-        $user = new User();
-        $result = new PdoUserRepository();
-
-        $user->setId($id);
-
-        $result->remove($user);
+        $this->user->setId($id);
+        $this->pdoRepository->remove($this->user);
     }
 
     public function switchStatusUser($id, $active)
     {
         $this->validId($id);
 
-        $user = new User();
-        $result = new PdoUserRepository();
+        $this->user->setId($id);
+        $this->user->setActive($active);
 
-        $user->setId($id);
-        $user->setActive($active);
-
-        $result->update($user);
+        $this->pdoRepository->update($this->user);
     }
 
     public function validEmail($email): void
     {
         $result = filter_var($email, FILTER_VALIDATE_EMAIL);
-
         if ($result === false) {
             throw new Exception('Please, insert email valid');
         }
@@ -69,7 +70,6 @@ class AdminController
     public function validPassword($password): void
     {
         $result = trim(filter_var($password, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
-
         if (!$result) {
             throw new Exception('Please, insert password valid');
         } elseif (strlen($result) < 3) {
@@ -84,4 +84,6 @@ class AdminController
             throw new Exception('ID is invalid');
         }
     }
+
+
 }

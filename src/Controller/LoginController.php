@@ -9,21 +9,31 @@ use Login\App\Domain\Model\User;
 use Login\App\Helper\Helper;
 use Login\App\Infrastructure\Repository\PdoUserRepository;
 
-class LoginController extends AdminController
+class LoginController
 {
+    private AdminController $adminController;
+    private Helper $helper;
+    private User $user;
+    private PdoUserRepository $pdoRepository;
+
+    public function __construct()
+    {
+        $this->adminController = new AdminController();
+        $this->user = new User();
+        $this->pdoRepository = new PdoUserRepository();
+        $this->helper = new Helper();
+    }
+    
     public function loginValidation(string $email, string $password)
     {
-        $this->validEmail($email);
-        $this->validPassword($password);
+        $this->adminController->validEmail($email);
+        $this->adminController->validPassword($password);
 
-        $user = new User();
-        $result = new PdoUserRepository();
+        $this->user->setEmail($email);
+        $this->user->setPassword($password);
 
-        $user->setEmail($email);
-        $user->setPassword($password);
-
-        $queryLogin = $result->login($user);
-        $queryActive = $result->active($user);
+        $queryLogin = $this->pdoRepository->login($this->user);
+        $queryActive = $this->pdoRepository->active($this->user);
 
         $this->validUser($queryLogin, $queryActive);
     }
@@ -41,11 +51,9 @@ class LoginController extends AdminController
         }
     }
 
-    public function blockAdmin()
+    public function blockAdmin(): void
     {
-        $helper = new Helper();
-        $is_admin = ($helper->verifyUrlAdmin());
-
+        $is_admin = ($this->helper->verifyUrlAdmin());
         if ($is_admin == true and $this->IsUserLogged() == false) {
             header('Location: ' . SITE_URL . "index.php");
             die();
@@ -57,7 +65,7 @@ class LoginController extends AdminController
         return (isset($_SESSION['logged_user']));
     }
 
-    public function logout()
+    public function logout(): void
     {
         unset($_SESSION['logged_user']);
     }
