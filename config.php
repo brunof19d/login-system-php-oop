@@ -1,4 +1,9 @@
 <?php
+/**
+ * Created by Bruno Dadario
+ * brunof19d@gmail.com
+ */
+
 /* Require autoload Composer */
 require "vendor/autoload.php";
 
@@ -8,6 +13,12 @@ use Login\App\Controller\LoginController;
 use Login\App\Domain\Model\User;
 use Login\App\Helper\Helper;
 use Login\App\Infrastructure\Repository\PdoUserRepository;
+
+/* Config Database */
+define('DB_HOST', 'localhost'); // Example: localhost, 127.0.0.1, www.domain.com
+define('DB_NAME', 'mylogin'); // Database name
+define('DB_USER', 'root'); // MySQL username
+define('DB_PASSWORD', ''); // MySQL password
 
 /* Config site */
 define('SITE_URL', 'http://localhost/login-system-php-oo/'); // Put your URL project here

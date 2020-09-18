@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Created by Bruno Dadario
+ * brunof19d@gmail.com
+ */
 
 namespace Login\App\Domain\Model;
 

@@ -1,4 +1,8 @@
 <?php
+/**
+ * Created by Bruno Dadario
+ * brunof19d@gmail.com
+ */
 
 
 namespace Login\App\Infrastructure\Persistence;
@@ -16,9 +20,9 @@ class DatabaseCreator
      */
     public static function getConnection(): PDO
     {
-        $dsn = 'mysql:dbname=mylogin;host=127.0.0.1';
-        $user = 'root';
-        $password = '';
+        $dsn = "mysql:dbname=" . DB_NAME . ";host=" . DB_HOST;
+        $user = DB_USER;
+        $password = DB_PASSWORD;
 
         try {
             $pdo = new PDO($dsn, $user, $password);

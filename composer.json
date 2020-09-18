@@ -1,12 +1,12 @@
 {
     "authors": [
         {
-            "name": "brunof19d",
+            "name": "Bruno Dadario",
             "email": "brunof19d@gmail.com"
         }
     ],
     "description": "Simple login system using PHP Object Oriented Programming",
-    "name": "bruno/login-composer",
+    "name": "PHP Login OOP",
 
     "require": {
         "php": "^7.4",
