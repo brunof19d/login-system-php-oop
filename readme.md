@@ -1,3 +1,5 @@
+[![licence mit](https://img.shields.io/badge/licence-MIT-blue.svg)](https://github.com/brunof19d/login-system-php-oo/blob/master/LICENSE)
+
 # PHP-Login-OOP
 
 ## About
